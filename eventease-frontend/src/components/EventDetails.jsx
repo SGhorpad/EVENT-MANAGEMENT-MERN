@@ -17,7 +17,7 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/events/${id}`);
+        const res = await axios.get(`https://event-management-mern-1owy.onrender.com/api/events/${id}`);
         setEvent(res.data);
 
         // Check if user already RSVPed
@@ -50,7 +50,7 @@ const EventDetails = () => {
       setRsvpError("");
 
       await axios.post(
-        `http://localhost:5000/api/events/${id}/rsvp`,
+        `https://event-management-mern-1owy.onrender.com/api/events/${id}/rsvp`,
         {},
         {
           headers: {
@@ -71,7 +71,7 @@ const EventDetails = () => {
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/events/${id}`);
+        await axios.delete(`https://event-management-mern-1owy.onrender.com/api/events/${id}`);
         alert("Event deleted successfully.");
         navigate("/events");
       } catch (error) {
