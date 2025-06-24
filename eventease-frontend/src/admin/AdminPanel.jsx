@@ -15,7 +15,7 @@ const AdminPanel = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/events");
+      const res = await axios.get("https://event-management-mern-1owy.onrender.com/api/events");
       setEvents(res.data);
     } catch (error) {
       alert("Failed to load events");
@@ -46,7 +46,7 @@ const AdminPanel = () => {
   const handleDeleteClick = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/events/${id}`);
+        await axios.delete(`https://event-management-mern-1owy.onrender.com/api/events/${id}`);
         alert("Event deleted");
         fetchEvents();
       } catch (error) {
@@ -59,10 +59,10 @@ const AdminPanel = () => {
     e.preventDefault();
     try {
       if (form._id) {
-        await axios.put(`http://localhost:5000/api/events/${form._id}`, form);
+        await axios.put(`https://event-management-mern-1owy.onrender.com/api/events/${form._id}`, form);
         alert("Event updated");
       } else {
-        await axios.post("http://localhost:5000/api/events", form);
+        await axios.post("https://event-management-mern-1owy.onrender.comapi/events", form);
         alert("Event created");
       }
       resetForm();
