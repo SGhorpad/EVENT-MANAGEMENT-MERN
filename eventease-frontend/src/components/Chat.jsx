@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { AuthContext } from '../context/AuthContext';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://event-management-mern-1owy.onrender.com');
 
 const Chat = () => {
   const { user } = useContext(AuthContext);
