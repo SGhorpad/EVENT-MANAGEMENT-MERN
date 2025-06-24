@@ -44,7 +44,7 @@ const CreateEvent = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/events", formData, {
+      await axios.post("https://event-management-mern-1owy.onrender.com/api/events", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("✅ Event created successfully!");
