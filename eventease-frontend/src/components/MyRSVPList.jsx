@@ -15,7 +15,7 @@ const MyRSVPList = () => {
     if (!window.confirm("Are you sure you want to cancel your RSVP?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/rsvp/${eventId}`, {
+      await axios.delete(`https://event-management-mern-1owy.onrender.com/api/rsvp/${eventId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setData((prev) => prev.filter((event) => event._id !== eventId));
@@ -31,12 +31,12 @@ const MyRSVPList = () => {
       try {
         let res;
         if (id) {
-          res = await axios.get(`http://localhost:5000/api/events/${id}/rsvps`, {
+          res = await axios.get(`https://event-management-mern-1owy.onrender.com/api/events/${id}/rsvps`, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
           setData(res.data.rsvps);
         } else {
-          res = await axios.get(`http://localhost:5000/api/rsvp/myrsvps`, {
+          res = await axios.get(`https://event-management-mern-1owy.onrender.com/api/rsvp/myrsvps`, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
           setData(res.data);
