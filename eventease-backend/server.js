@@ -47,7 +47,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/rsvp", rsvpRoutes);
 
 //  Connect to MongoDB Atlas using MONGO_URL from .env
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
