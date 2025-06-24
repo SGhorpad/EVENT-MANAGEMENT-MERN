@@ -19,7 +19,7 @@ export default function ResetPassword() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/reset-password", { token, password });
+      const res = await axios.post("https://event-management-mern-1owy.onrender.com/api/auth/reset-password", { token, password });
       setMsg(res.data.message);
       setPassword("");
       setTimeout(() => navigate("/login"), 3000); // Redirect after 3 seconds
