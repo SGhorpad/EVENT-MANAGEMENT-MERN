@@ -83,7 +83,7 @@ const HomePage = () => {
               fontWeight: 500,
             }}
           >
-            Your one-stop platform to create, manage, and join amazing events seamlessly.
+           Your one-stop platform to create, manage, and join amazing events seamlessly.
           </p>
           <button
             onClick={handleGetStartedClick}
