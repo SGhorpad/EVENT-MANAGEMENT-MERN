@@ -19,7 +19,7 @@ const Login = () => {
     setLoading(true);
     try {
       // Include role in login request body
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://event-management-mern-1owy.onrender.com/api/auth/login", {
         email,
         password,
         role,
