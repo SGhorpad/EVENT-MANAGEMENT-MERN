@@ -24,7 +24,7 @@ const featuresData = [
 const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // ✅ get user from AuthContext
+  const { user } = useContext(AuthContext); //  get user from AuthContext
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -32,9 +32,9 @@ const HomePage = () => {
 
   const handleGetStartedClick = () => {
     if (user) {
-      navigate('/events'); // ✅ redirect to events if logged in
+      navigate('/events'); // redirect to events if logged in
     } else {
-      navigate('/register'); // 🚫 redirect to register if not logged in
+      navigate('/register'); // redirect to register if not logged in
     }
   };
 
