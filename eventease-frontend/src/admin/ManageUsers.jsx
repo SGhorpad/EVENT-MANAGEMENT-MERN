@@ -8,7 +8,7 @@ const ManageUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/admin/users");
+      const res = await axios.get("https://event-management-mern-1owy.onrender.com/api/admin/users");
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to fetch users", err);
@@ -24,7 +24,7 @@ const ManageUsers = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${id}`);
+      await axios.delete(`https://event-management-mern-1owy.onrender.com/api/admin/users/${id}`);
       setUsers((prev) => prev.filter((user) => user._id !== id));
       alert("User deleted successfully");
     } catch (err) {
