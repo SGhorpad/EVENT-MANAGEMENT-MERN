@@ -11,15 +11,12 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // Shared style for each nav link container
   const linkContainerStyle = {
     border: "1.5px solid transparent",
     borderRadius: "8px",
     padding: "6px 12px",
     transition: "all 0.3s ease",
   };
-
-  // Style for mouse hover (will be applied via inline event handlers)
 
   return (
     <nav
@@ -60,42 +57,115 @@ const Navbar = () => {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav align-items-center">
-            {[
-              { to: "/", label: "Home" },
-              { to: "/events", label: "Events" },
-              { to: "/chat", label: "Chat" },
-              ...(user && user.role === "admin"
-                ? [{ to: "/admin", label: "Admin Panel" }]
-                : []),
-              ...(user
-                ? [{ to: "/dashboard", label: "Dashboard" }]
-                : []),
-            ].map(({ to, label }) => (
-              <Link
-                key={label}
-                to={to}
-                className="nav-link text-white mx-2 fw-semibold"
-                style={linkContainerStyle}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#ffc107";
-                  e.currentTarget.style.color = "#000";
-                  e.currentTarget.style.borderColor = "#ffc107";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "white";
-                  e.currentTarget.style.borderColor = "transparent";
-                }}
-              >
-                {label}
-              </Link>
-            ))}
+            {/* Always show Home */}
+            <Link
+              to="/"
+              className="nav-link text-white mx-2 fw-semibold"
+              style={linkContainerStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#ffc107";
+                e.currentTarget.style.color = "#000";
+                e.currentTarget.style.borderColor = "#ffc107";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = "white";
+                e.currentTarget.style.borderColor = "transparent";
+              }}
+            >
+              Home
+            </Link>
 
+            {/* Show only when logged in */}
+            {user && (
+              <>
+                <Link
+                  to="/events"
+                  className="nav-link text-white mx-2 fw-semibold"
+                  style={linkContainerStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffc107";
+                    e.currentTarget.style.color = "#000";
+                    e.currentTarget.style.borderColor = "#ffc107";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "white";
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                >
+                  Events
+                </Link>
+
+                <Link
+                  to="/chat"
+                  className="nav-link text-white mx-2 fw-semibold"
+                  style={linkContainerStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffc107";
+                    e.currentTarget.style.color = "#000";
+                    e.currentTarget.style.borderColor = "#ffc107";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "white";
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                >
+                  Chat
+                </Link>
+
+                {/* Admin panel only for admins */}
+                {user.role === "admin" && (
+                  <Link
+                    to="/admin"
+                    className="nav-link text-white mx-2 fw-semibold"
+                    style={linkContainerStyle}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#ffc107";
+                      e.currentTarget.style.color = "#000";
+                      e.currentTarget.style.borderColor = "#ffc107";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = "white";
+                      e.currentTarget.style.borderColor = "transparent";
+                    }}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+
+                {/* Dashboard for all users */}
+                <Link
+                  to="/dashboard"
+                  className="nav-link text-white mx-2 fw-semibold"
+                  style={linkContainerStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffc107";
+                    e.currentTarget.style.color = "#000";
+                    e.currentTarget.style.borderColor = "#ffc107";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "white";
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                >
+                  Dashboard
+                </Link>
+              </>
+            )}
+
+            {/* Login/Register or Logout */}
             {user ? (
               <button
                 onClick={handleLogout}
                 className="btn btn-warning btn-sm ms-3 rounded-pill fw-semibold d-flex align-items-center"
-                style={{ gap: "0.4rem", boxShadow: "0 3px 6px rgba(0,0,0,0.15)" }}
+                style={{
+                  gap: "0.4rem",
+                  boxShadow: "0 3px 6px rgba(0,0,0,0.15)",
+                }}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#ffc107";
                   e.target.style.color = "#000";
