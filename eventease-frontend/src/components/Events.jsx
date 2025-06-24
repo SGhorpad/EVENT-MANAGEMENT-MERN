@@ -15,7 +15,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/events");
+        const res = await axios.get("https://event-management-mern-1owy.onrender.com/api/events");
         setEvents(res.data);
       } catch (err) {
         console.error("Error fetching events", err);
@@ -50,7 +50,7 @@ const Events = () => {
                 <img
                   src={
                     event.image
-                      ? `http://localhost:5000${event.image}`
+                      ? `https://event-management-mern-1owy.onrender.com${event.image}`
                       : defaultImage
                   }
                   alt={event.title}
