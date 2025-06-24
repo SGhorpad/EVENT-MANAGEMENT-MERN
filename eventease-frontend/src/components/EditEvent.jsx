@@ -18,7 +18,7 @@ const EditEvent = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/events/${id}`);
+        const res = await axios.get(`https://event-management-mern-1owy.onrender.com/api/events/${id}`);
         const event = res.data;
         setEventData({
           title: event.title,
@@ -26,7 +26,7 @@ const EditEvent = () => {
           location: event.location,
           description: event.description,
           image: null,
-          imagePreview: event.image ? `http://localhost:5000${event.image}` : "",
+          imagePreview: event.image ? `https://event-management-mern-1owy.onrender.com{event.image}` : "",
         });
       } catch (err) {
         console.error("Fetch event error", err);
@@ -66,7 +66,7 @@ const EditEvent = () => {
         formData.append("image", eventData.image);
       }
 
-      await axios.put(`http://localhost:5000/api/events/${id}`, formData, {
+      await axios.put(`https://event-management-mern-1owy.onrender.com/api/events/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
