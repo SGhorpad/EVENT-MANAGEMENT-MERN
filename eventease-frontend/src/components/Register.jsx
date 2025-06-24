@@ -23,7 +23,7 @@ const Register = () => {
     setError("");
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", formData);
+      await axios.post("https://event-management-mern-1owy.onrender.com/api/auth/register", formData);
       alert("🎉 Registration successful! You can now login.");
       navigate("/login");
     } catch (err) {
