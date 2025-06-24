@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const featuresData = [
   {
@@ -23,13 +24,18 @@ const featuresData = [
 const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext); // ✅ get user from AuthContext
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
   const handleGetStartedClick = () => {
-    navigate('/register');
+    if (user) {
+      navigate('/events'); // ✅ redirect to events if logged in
+    } else {
+      navigate('/register'); // 🚫 redirect to register if not logged in
+    }
   };
 
   return (
@@ -52,7 +58,7 @@ const HomePage = () => {
           borderRadius: 20,
           boxShadow: '0 12px 28px rgba(92, 122, 234, 0.25)',
           padding: 30,
-          color: '#556677', // softer text color for all inside box
+          color: '#556677',
         }}
       >
         <header style={{ textAlign: 'center', marginBottom: 40 }}>
@@ -61,7 +67,7 @@ const HomePage = () => {
               fontSize: '2.8rem',
               fontWeight: 'bold',
               marginBottom: 10,
-              color: '#5C6AC4', // medium purple-blue, softer than dark
+              color: '#5C6AC4',
               fontFamily: "'Poppins', sans-serif",
               letterSpacing: '1.5px',
               textShadow: '1px 1px 5px rgba(92, 106, 196, 0.3)',
@@ -92,8 +98,8 @@ const HomePage = () => {
               boxShadow: '0 5px 15px rgba(92, 106, 196, 0.5)',
               transition: 'background-color 0.3s ease',
             }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#4f46e5'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#5C6AC4'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4f46e5'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5C6AC4'}
           >
             Get Started
           </button>
