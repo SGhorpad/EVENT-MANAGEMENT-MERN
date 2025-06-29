@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { AuthContext } from '../context/AuthContext';
 
+// Make sure this URL is your deployed backend URL with https://
 const socket = io('https://eventmanagement-backend-llr2.onrender.com');
 
 const Chat = () => {
@@ -11,12 +12,22 @@ const Chat = () => {
   const [chatMessages, setChatMessages] = useState([]);
 
   useEffect(() => {
+    socket.on('connect', () => {
+      console.log('✅ Socket connected, ID:', socket.id);
+    });
+
+    socket.on('connect_error', (error) => {
+      console.error('❌ Socket connection error:', error);
+    });
+
     socket.on('receive_message', (data) => {
       setChatMessages((prev) => [...prev, data]);
     });
 
     return () => {
       socket.off('receive_message');
+      socket.off('connect');
+      socket.off('connect_error');
     };
   }, []);
 
@@ -35,21 +46,21 @@ const Chat = () => {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: '100vh', backgroundColor: '#e6f0ff' }} // light blue background
+      style={{ minHeight: '100vh', backgroundColor: '#e6f0ff' }}
     >
       <div
         className="container py-5"
         style={{
           maxWidth: '650px',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)', // slightly translucent white
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '15px',
-          boxShadow: '0 8px 24px rgba(59, 130, 246, 0.15)', // subtle blue shadow
-          border: '1px solid #b3c7ff', // soft blue border
+          boxShadow: '0 8px 24px rgba(59, 130, 246, 0.15)',
+          border: '1px solid #b3c7ff',
         }}
       >
         <h3
           className="text-center mb-4 fw-bold"
-          style={{ color: '#2563eb' }} // sky blue heading
+          style={{ color: '#2563eb' }}
         >
           Real-Time Chat
         </h3>
@@ -61,9 +72,9 @@ const Chat = () => {
             overflowY: 'auto',
             backgroundColor: '#ffffff',
             borderRadius: '10px',
-            boxShadow: 'inset 0 0 8px rgba(59, 130, 246, 0.1)', // subtle blue inset shadow
-            border: '1px solid #93c5fd', // light blue border
-            color: '#1e293b', // dark slate text
+            boxShadow: 'inset 0 0 8px rgba(59, 130, 246, 0.1)',
+            border: '1px solid #93c5fd',
+            color: '#1e293b',
           }}
         >
           {chatMessages.map((msg, idx) => (
@@ -94,7 +105,7 @@ const Chat = () => {
             onClick={sendMessage}
             className="btn ms-2 text-white fw-semibold"
             style={{
-              backgroundColor: '#3b82f6', // sky blue button
+              backgroundColor: '#3b82f6',
               boxShadow: '0 4px 15px rgba(59, 130, 246, 0.4)',
               borderRadius: '10px',
               padding: '10px 20px',
