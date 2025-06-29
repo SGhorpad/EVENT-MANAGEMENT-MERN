@@ -18,13 +18,12 @@ const Login = () => {
     setError("");
     setLoading(true);
     try {
-      // Include role in login request body
-  await axios.post("https://event-management-mern-1owy.onrender.com/api/auth//login", {
-
+      const res = await axios.post("https://event-management-mern-1owy.onrender.com/api/auth/login", {
         email,
         password,
         role,
       });
+
       login({ ...res.data.user, token: res.data.token });
       navigate("/");
     } catch (err) {
@@ -36,7 +35,6 @@ const Login = () => {
 
   return (
     <>
-      {/* Inline style for smaller placeholder */}
       <style>{`
         ::placeholder {
           font-size: 0.85rem;
@@ -48,7 +46,7 @@ const Login = () => {
         className="d-flex justify-content-center align-items-center"
         style={{
           minHeight: "100vh",
-          background: "#e6f0ff", // very light blue background
+          background: "#e6f0ff",
           padding: "20px",
         }}
       >
@@ -59,8 +57,8 @@ const Login = () => {
             maxWidth: 430,
             background: "rgba(255, 255, 255, 0.95)",
             backdropFilter: "blur(8px)",
-            border: "1px solid #b3c7ff", // soft blue border
-            boxShadow: "0 6px 20px rgba(59, 130, 246, 0.15)", // subtle blue shadow
+            border: "1px solid #b3c7ff",
+            boxShadow: "0 6px 20px rgba(59, 130, 246, 0.15)",
           }}
         >
           <h2 className="text-center mb-4 fw-bold" style={{ color: "#2563eb" }}>
@@ -77,7 +75,6 @@ const Login = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-            {/* Role toggle */}
             <div className="mb-4 d-flex justify-content-center gap-4">
               <label style={{ cursor: "pointer" }}>
                 <input
@@ -170,7 +167,11 @@ const Login = () => {
 
           <div className="text-center mt-4" style={{ color: "#475569" }}>
             <span>Don't have an account? </span>
-            <Link to="/register" className="fw-semibold text-decoration-none" style={{ color: "#2563eb" }}>
+            <Link
+              to="/register"
+              className="fw-semibold text-decoration-none"
+              style={{ color: "#2563eb" }}
+            >
               Register here
             </Link>
           </div>
