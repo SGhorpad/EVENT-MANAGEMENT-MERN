@@ -11,8 +11,9 @@ const server = http.createServer(app);
 //  Setup Socket.IO with frontend origin from .env
 const io = new Server(server, {
   cors: {
-    origin:https://event-management-mern-frontend.onrender.com || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
+     credentials: true, 
   },
 });
 
@@ -31,7 +32,7 @@ io.on("connection", (socket) => {
 });
 
 //  Middlewares
-app.use(cors());
+app.use(cors(corsOptions)); 
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
