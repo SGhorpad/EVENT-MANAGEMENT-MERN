@@ -68,14 +68,13 @@ const Events = () => {
                   </p>
 
                   <div className="mt-auto d-flex gap-2">
-                    <button
-                      onClick={() =>
-                        (window.location.href = `/events/${event._id}`)
-                      }
-                      className="btn btn-outline-primary btn-sm"
-                    >
-                      View Details
-                    </button>
+                  <button
+                  onClick={() => navigate(`/events/${event._id}`)}
+                  className="btn btn-outline-primary btn-sm"
+                  >
+              View Details
+                </button>
+
 
                     {user?.role === "admin" && (
                       <button
