@@ -11,7 +11,7 @@ const server = http.createServer(app);
 //  Setup Socket.IO with frontend origin from .env
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin:https://event-management-mern-frontend.onrender.com || "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
