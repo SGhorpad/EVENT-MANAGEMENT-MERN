@@ -3,7 +3,11 @@ import { io } from 'socket.io-client';
 import { AuthContext } from '../context/AuthContext';
 
 // Make sure this URL is your deployed backend URL with https://
-const socket = io('https://eventmanagement-backend-llr2.onrender.com');
+const socket = io('https://eventmanagement-backend-llr2.onrender.com', {
+  transports: ["websocket"],   // avoid long polling
+  withCredentials: true        // allow CORS credentials
+});
+
 
 const Chat = () => {
   const { user } = useContext(AuthContext);
