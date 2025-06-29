@@ -1,4 +1,4 @@
-require('dotenv').config(); //  Load environment variables
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,16 +8,20 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 
-//  Setup Socket.IO with frontend origin from .env
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  methods: ["GET", "POST"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));  // <--- Important: use cors with options here
+app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+
 const io = new Server(server, {
-  cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    methods: ["GET", "POST"],
-     credentials: true, 
-  },
+  cors: corsOptions,  // <--- Same cors options for socket.io
 });
 
-//  Handle WebSocket connections
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
@@ -31,12 +35,7 @@ io.on("connection", (socket) => {
   });
 });
 
-//  Middlewares
-app.use(cors(corsOptions)); 
-app.use(express.json());
-app.use('/uploads', express.static('uploads'));
-
-//  Routes
+// Routes
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/events");
 const adminRoutes = require('./routes/admin');
@@ -47,16 +46,15 @@ app.use("/api/events", eventRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/rsvp", rsvpRoutes);
 
-//  Connect to MongoDB Atlas using MONGO_URL from .env
+// Connect MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => console.log("MongoDB Atlas connected"))
-.catch((err) => console.error(" MongoDB connection error:", err));
+.catch((err) => console.error("MongoDB connection error:", err));
 
-//  Start the server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
